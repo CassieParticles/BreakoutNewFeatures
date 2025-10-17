@@ -2,49 +2,49 @@
 
 #include "CONSTANTS.h"
 
-PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :window{ window }, color{ color }, velocity{ 0,250.f },shouldBeDestroyed{false}
+PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :_window{ window }, _color{ color }, _velocity{ 0,250.f },_shouldBeDestroyed{false}
 {
-	sprite.setRadius(POWERUP_RADIUS);
-	sprite.setFillColor(color);
+	_sprite.setRadius(POWERUP_RADIUS);
+	_sprite.setFillColor(color);
 }
 
 PowerupContainer::PowerupContainer(PowerupContainer& first) 
-	:window{ first.window },color{first.color},velocity{first.velocity}
-	,sprite{first.sprite}
+	:_window{ first._window },_color{first._color},_velocity{first._velocity}
+	,_sprite{first._sprite}
 {
 	//Copy effects (uses custom function that circumvents copy constructor limitations)
-	for (std::unique_ptr<IEffect>& effect : first.effects)
+	for (std::unique_ptr<IEffect>& effect : first._effects)
 	{
-		effects.emplace_back(effect->CopyEffect());
+		_effects.emplace_back(effect->CopyEffect());
 	}
 }
 
 void PowerupContainer::AddEffect(IEffect* effect)
 {
-	effects.emplace_back(effect);
+	_effects.emplace_back(effect);
 }
 
 void PowerupContainer::Update(float dt)
 {
-	sprite.move(velocity * dt);
+	_sprite.move(_velocity * dt);
 
 	//TODO: Handle collision with player in player
 	
 	//Flag for destruction once object should be destroyed
-	if (sprite.getPosition().y + sprite.getRadius() * 2 >= window->getSize().y)
+	if (_sprite.getPosition().y + _sprite.getRadius() * 2 >= _window->getSize().y)
 	{
-		shouldBeDestroyed = true;
+		_shouldBeDestroyed = true;
 	}
 }
 
 void PowerupContainer::Render()
 {
-	window->draw(sprite);
+	_window->draw(_sprite);
 }
 
 void PowerupContainer::ApplyEffect()
 {
-	for (std::unique_ptr<IEffect>& effect : effects)
+	for (std::unique_ptr<IEffect>& effect : _effects)
 	{
 		effect->ApplyEffect(2.0f);
 	}

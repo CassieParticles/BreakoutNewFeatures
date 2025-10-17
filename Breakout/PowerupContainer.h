@@ -23,6 +23,8 @@ public:
 
 	void ApplyEffect();
 
+	bool CheckCollisionWithPaddle(Paddle* paddle);
+
 	bool ShouldBeDestroyed() { return shouldBeDestroyed; }
 private:
 	//Rendering
