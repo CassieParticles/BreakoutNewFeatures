@@ -71,3 +71,18 @@ private:
 	Ball* ball;
 	float ballSpeedMultiplier;
 };
+
+class FireBallEffect : public IEffect
+{
+public:
+	FireBallEffect(Ball* ball);
+
+	void ApplyEffect(float duration) override;
+	void EndEffect();
+
+	std::string GetName() override { return "Fire ball"; }
+
+	IEffect* CopyEffect();
+private:
+	Ball* _ball;
+};

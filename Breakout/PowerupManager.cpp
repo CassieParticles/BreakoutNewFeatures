@@ -118,7 +118,7 @@ void PowerupManager::InitialisePowerups()
     slowBall->AddEffect(new BallSpeedEffect(_ball, 0.5f));
     bigPaddle->AddEffect(new PaddleSizeEffect(_paddle, 1.5f));
     smallPaddle->AddEffect(new PaddleSizeEffect(_paddle, 0.67f));
-    fireBall->AddEffect(new DebugEffect("Fireball totally implemented :P"));
+    fireBall->AddEffect(new FireBallEffect(_ball));
 
     templatePowerups.push_back(fastBall);
     templatePowerups.push_back(slowBall);

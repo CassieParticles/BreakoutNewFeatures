@@ -27,6 +27,26 @@ void DebugEffect::ApplyEffect(float duration)
 	std::cout << _debugMessage << '\n';
 }
 
+FireBallEffect::FireBallEffect(Ball* ball):_ball{ball}
+{
+}
+
+void FireBallEffect::ApplyEffect(float duration)
+{
+	IEffect::ApplyEffect(duration);
+	_ball->setFireBall(duration);
+}
+
+void FireBallEffect::EndEffect()
+{
+	//TODO: End Fireball
+}
+
+IEffect* FireBallEffect::CopyEffect()
+{
+	return new FireBallEffect(_ball);
+}
+
 IEffect* DebugEffect::CopyEffect()
 {
 	return new DebugEffect(_debugMessage);
