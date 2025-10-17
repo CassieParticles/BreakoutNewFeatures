@@ -23,18 +23,18 @@ public:
 
 	void ApplyEffect();
 
-	bool CheckCollisionWithPaddle(Paddle* paddle);
+	void CheckCollisionWithPaddle(Paddle* paddle);
 
-	bool ShouldBeDestroyed() { return shouldBeDestroyed; }
+	bool ShouldBeDestroyed() { return _shouldBeDestroyed; }
 private:
 	//Rendering
-	sf::RenderWindow* window;
-	sf::CircleShape sprite;
-	sf::Color color;
+	sf::RenderWindow* _window;
+	sf::CircleShape _sprite;
+	sf::Color _color;
 
-	sf::Vector2f velocity;
+	sf::Vector2f _velocity;
 
-	std::vector<std::unique_ptr<IEffect>> effects;
+	std::vector<std::unique_ptr<IEffect>> _effects;
 
-	bool shouldBeDestroyed;
+	bool _shouldBeDestroyed;
 };

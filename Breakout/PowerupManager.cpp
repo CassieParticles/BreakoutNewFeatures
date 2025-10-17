@@ -22,8 +22,6 @@ PowerupManager::~PowerupManager()
 
 void PowerupManager::update(float dt)
 {
-
-
     // tick down powerup effect time. Reset if elapsed.
     if (_powerupInEffect)
     {
@@ -33,6 +31,8 @@ void PowerupManager::update(float dt)
             _powerupInEffect.reset();
         }
     }
+
+    checkPlayerCollision();
 
     for (auto it = powerups.begin(); it != powerups.end();)
     {
@@ -48,31 +48,10 @@ void PowerupManager::update(float dt)
         }
     }
 
-
-    //for (auto it = _powerups.begin(); it != _powerups.end(); )
-    //{
-    //    checkCollision();
-    //    
-    //    // Delete powerups queued for removal
-    //    (*it)->update(dt);
-    //    if (!(*it)->isAlive())
-    //    {
-    //        delete* it;
-    //        it = _powerups.erase(it);
-    //    }
-    //    else
-    //    {
-    //        ++it;
-    //    }
-    //}
 }
 
 void PowerupManager::render()
 {
-    for (auto& powerup : _powerups)
-    {
-        powerup->render();
-    }
     for (auto& powerup : powerups)
     {
         powerup->Render();
@@ -86,16 +65,11 @@ void PowerupManager::spawnPowerup()
     powerups.push_back(new PowerupContainer(*templateContainer));
 }
 
-void PowerupManager::checkCollision()
+void PowerupManager::checkPlayerCollision()
 {
-    for (auto& powerup : _powerups)
+    for (auto& powerup : powerups)
     {
-
-        if (powerup->checkCollisionWithPaddle())
-        {
-            _powerupInEffect = powerup->applyEffect();
-            powerup->setAlive(false);
-        }
+        powerup->CheckCollisionWithPaddle(_paddle);
     }
 }
 

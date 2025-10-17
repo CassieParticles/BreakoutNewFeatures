@@ -2,6 +2,8 @@
 
 #include "CONSTANTS.h"
 
+#include "Paddle.h"
+
 PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :_window{ window }, _color{ color }, _velocity{ 0,250.f },_shouldBeDestroyed{false}
 {
 	_sprite.setRadius(POWERUP_RADIUS);
@@ -48,4 +50,14 @@ void PowerupContainer::ApplyEffect()
 	{
 		effect->ApplyEffect(2.0f);
 	}
+}
+
+void PowerupContainer::CheckCollisionWithPaddle(Paddle* paddle)
+{
+	if (_sprite.getGlobalBounds().intersects(paddle->getBounds()))
+	{
+		_shouldBeDestroyed = true;
+		ApplyEffect();
+	}
+
 }
