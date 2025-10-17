@@ -32,4 +32,9 @@ fire ball (green)
 * Implement commentary with calls to an LLM such as LLama
 
 # Time Details and Changelist
-<Add information to this section about the time you've taken for this task along with a professional changelist.>
+12:50-13:00 - Fixed circular dependency
+
+17:00-18:45 - Refactored and overhauled powerup system
+Powerups now use separate powerup containers, and effects, containers handle position, movement, triggering, and effects make changes to the game when collected
+Powerups can have multiple effects, all effects inherit from the IEffect interface
+
