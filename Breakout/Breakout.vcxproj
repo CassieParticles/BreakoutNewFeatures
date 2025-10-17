@@ -148,14 +148,8 @@
     </ClCompile>
     <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="Paddle.cpp" />
-    <ClCompile Include="PowerupBase.cpp" />
-    <ClCompile Include="PowerupBigPaddle.cpp" />
     <ClCompile Include="PowerupContainer.cpp" />
-    <ClCompile Include="PowerupFastBall.cpp" />
-    <ClCompile Include="PowerupFireBall.cpp" />
     <ClCompile Include="PowerupManager.cpp" />
-    <ClCompile Include="PowerupSlowBall.cpp" />
-    <ClCompile Include="PowerupSmallPaddle.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,14 +161,8 @@
     <ClInclude Include="Effects.h" />
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="Paddle.h" />
-    <ClInclude Include="PowerupBase.h" />
-    <ClInclude Include="PowerupBigPaddle.h" />
     <ClInclude Include="PowerupContainer.h" />
-    <ClInclude Include="PowerupFastBall.h" />
-    <ClInclude Include="PowerupFireBall.h" />
     <ClInclude Include="PowerupManager.h" />
-    <ClInclude Include="PowerupSlowBall.h" />
-    <ClInclude Include="PowerupSmallPaddle.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

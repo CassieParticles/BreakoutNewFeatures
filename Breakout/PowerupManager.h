@@ -3,12 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <optional>
-#include "PowerupBase.h"
-#include "PowerupBigPaddle.h"
-#include "PowerupSmallPaddle.h"
-#include "PowerupSlowBall.h"
-#include "PowerupFastBall.h"
-#include "PowerupFireBall.h"
 #include "Paddle.h"
 #include "Ball.h"
 
