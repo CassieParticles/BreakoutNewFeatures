@@ -38,5 +38,6 @@ private:
 
     std::optional<std::pair<POWERUPS, float>> _powerupInEffect;    // used for gameManager to get reference.
 
-    PowerupContainer* templateContainer;
+    std::vector<PowerupContainer*> templatePowerups;
+    void InitialisePowerups();
 };

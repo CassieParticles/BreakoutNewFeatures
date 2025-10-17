@@ -6,10 +6,11 @@
 PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball)
     : _window(window), _paddle(paddle), _ball(ball)
 {
-    templateContainer = new PowerupContainer(_window, sf::Color::Red);
-    templateContainer->AddEffect(new DebugEffect("Effect applied"));
-    templateContainer->AddEffect(new BallSpeedEffect(_ball, 0.2f));
+    InitialisePowerups();
 }
+
+
+
 
 PowerupManager::~PowerupManager()
 {
@@ -61,7 +62,12 @@ void PowerupManager::render()
 
 void PowerupManager::spawnPowerup(sf::Vector2f position)
 {
-    PowerupContainer* powerup = new PowerupContainer(*templateContainer);
+    //Pick random powerup from vector
+    int randomNumber = rand() % templatePowerups.size();
+    PowerupContainer* randomPowerup = templatePowerups[randomNumber];
+
+    //Copy random powerup
+    PowerupContainer* powerup = new PowerupContainer(*randomPowerup);
     _powerups.push_back(powerup);
     powerup->SetPosition(position);
 }
@@ -83,4 +89,25 @@ std::pair<POWERUPS, float> PowerupManager::getPowerupInEffect()
 {
     if (!_powerupInEffect) return { none, 0.f };
     return *_powerupInEffect;
+}
+
+void PowerupManager::InitialisePowerups()
+{
+    PowerupContainer* fastBall = new PowerupContainer(_window, sf::Color::Yellow);
+    PowerupContainer* slowBall = new PowerupContainer(_window, sf::Color::Blue);
+    PowerupContainer* bigPaddle = new PowerupContainer(_window, sf::Color(155,0,255));
+    PowerupContainer* smallPaddle = new PowerupContainer(_window, sf::Color::Green);
+    PowerupContainer* fireBall = new PowerupContainer(_window, sf::Color::Red);
+
+    fastBall->AddEffect(new BallSpeedEffect(_ball, 2.0f));
+    slowBall->AddEffect(new BallSpeedEffect(_ball, 0.5f));
+    bigPaddle->AddEffect(new PaddleSizeEffect(_paddle, 1.5f));
+    smallPaddle->AddEffect(new PaddleSizeEffect(_paddle, 0.67f));
+    fireBall->AddEffect(new DebugEffect("Fireball totally implemented :P"));
+
+    templatePowerups.push_back(fastBall);
+    templatePowerups.push_back(slowBall);
+    templatePowerups.push_back(bigPaddle);
+    templatePowerups.push_back(smallPaddle);
+    templatePowerups.push_back(fireBall);
 }
