@@ -95,3 +95,8 @@ void Ball::setFireBall(bool fireball)
         _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
     }
 }
+
+void Ball::setSize(float coeff)
+{
+    _sprite.setRadius(_sprite.getRadius() * coeff);
+}
