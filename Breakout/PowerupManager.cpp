@@ -13,10 +13,11 @@ PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* b
 
 PowerupManager::~PowerupManager()
 {
-    for (auto powerup : _powerups)
+    for (PowerupContainer* container : _powerups)
     {
-        delete powerup;
+        delete container;
     }
+
     _powerups.clear();
 }
 
@@ -34,13 +35,13 @@ void PowerupManager::update(float dt)
 
     checkPlayerCollision();
 
-    for (auto it = powerups.begin(); it != powerups.end();)
+    for (auto it = _powerups.begin(); it != _powerups.end();)
     {
         (*it)->Update(dt);
         if ((*it)->ShouldBeDestroyed())
         {
             delete *it;
-            it = powerups.erase(it);
+            it = _powerups.erase(it);
         }
         else
         {
@@ -52,22 +53,22 @@ void PowerupManager::update(float dt)
 
 void PowerupManager::render()
 {
-    for (auto& powerup : powerups)
+    for (auto& powerup : _powerups)
     {
         powerup->Render();
     }
 }
 
-void PowerupManager::spawnPowerup()
+void PowerupManager::spawnPowerup(sf::Vector2f position)
 {
-    //TODO: Add powerup spawning
-
-    powerups.push_back(new PowerupContainer(*templateContainer));
+    PowerupContainer* powerup = new PowerupContainer(*templateContainer);
+    _powerups.push_back(powerup);
+    powerup->SetPosition(position);
 }
 
 void PowerupManager::checkPlayerCollision()
 {
-    for (auto& powerup : powerups)
+    for (auto& powerup : _powerups)
     {
         powerup->CheckCollisionWithPaddle(_paddle);
     }

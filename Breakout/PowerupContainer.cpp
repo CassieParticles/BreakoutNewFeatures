@@ -4,7 +4,9 @@
 
 #include "Paddle.h"
 
-PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :_window{ window }, _color{ color }, _velocity{ 0,250.f },_shouldBeDestroyed{false}
+PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) 
+	:_window{ window }, _color{ color }, _velocity{ 0,250.f },
+	_shouldBeDestroyed{false}
 {
 	_sprite.setRadius(POWERUP_RADIUS);
 	_sprite.setFillColor(color);
@@ -12,13 +14,18 @@ PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :_
 
 PowerupContainer::PowerupContainer(PowerupContainer& first) 
 	:_window{ first._window },_color{first._color},_velocity{first._velocity}
-	,_sprite{first._sprite}
+	, _sprite{ first._sprite }, _shouldBeDestroyed{ false }
 {
 	//Copy effects (uses custom function that circumvents copy constructor limitations)
 	for (std::unique_ptr<IEffect>& effect : first._effects)
 	{
 		_effects.emplace_back(effect->CopyEffect());
 	}
+}
+
+void PowerupContainer::SetPosition(sf::Vector2f position)
+{
+	_sprite.setPosition(position);
 }
 
 void PowerupContainer::AddEffect(IEffect* effect)
@@ -29,10 +36,8 @@ void PowerupContainer::AddEffect(IEffect* effect)
 void PowerupContainer::Update(float dt)
 {
 	_sprite.move(_velocity * dt);
-
-	//TODO: Handle collision with player in player
 	
-	//Flag for destruction once object should be destroyed
+	//Flag powerup for destruction once object should be destroyed
 	if (_sprite.getPosition().y + _sprite.getRadius() * 2 >= _window->getSize().y)
 	{
 		_shouldBeDestroyed = true;

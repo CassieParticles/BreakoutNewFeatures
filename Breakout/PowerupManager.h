@@ -24,7 +24,7 @@ public:
 
     void update(float dt);
     void render();
-    void spawnPowerup(); // Method to spawn a power-up
+    void spawnPowerup(sf::Vector2f position); // Method to spawn a power-up
     void checkPlayerCollision(); // Check collision with paddle
     int getPowerupsSpawned();
     std::pair<POWERUPS, float> getPowerupInEffect();
@@ -34,10 +34,8 @@ private:
     Paddle* _paddle;
     Ball* _ball;
 
-    std::vector<PowerupContainer*> powerups;
+    std::vector<PowerupContainer*> _powerups;
 
-
-    std::vector<PowerupBase*> _powerups;            // used to manage deletion.
     std::optional<std::pair<POWERUPS, float>> _powerupInEffect;    // used for gameManager to get reference.
 
     PowerupContainer* templateContainer;

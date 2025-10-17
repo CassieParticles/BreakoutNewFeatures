@@ -14,17 +14,17 @@ class PowerupContainer
 public:
 	PowerupContainer(sf::RenderWindow* window, sf::Color color);
 	PowerupContainer(PowerupContainer& first);
+	//Set up
+	void SetPosition(sf::Vector2f position);
 
+	//Powerup lifecycle
 	void AddEffect(IEffect* effect);
-
 	void Update(float dt);
-
 	void Render();
-
 	void ApplyEffect();
 
+	//Checks
 	void CheckCollisionWithPaddle(Paddle* paddle);
-
 	bool ShouldBeDestroyed() { return _shouldBeDestroyed; }
 private:
 	//Rendering
