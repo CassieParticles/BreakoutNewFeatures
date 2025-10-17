@@ -59,6 +59,8 @@ sf::FloatRect Paddle::getBounds() const
 // ensure centre remains consistent.
 void Paddle::setWidth(float coeff, float duration)
 {
+    //TODO: REMOVE SELF CORRECTING SIZE, THIS SHOULD BE HANDLED BY POWERUP
+
     _width = coeff * PADDLE_WIDTH;
     _sprite.setSize(sf::Vector2f(_width, _sprite.getSize().y));
     _timeInNewSize = duration;

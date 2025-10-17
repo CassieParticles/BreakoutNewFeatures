@@ -99,6 +99,8 @@ void Ball::render()
 
 void Ball::setVelocity(float coeff, float duration)
 {
+    //TODO: REMOVE SELF CORRECTING SPEED, THIS SHOULD BE HANDLED BY POWERUP
+
     _velocity = coeff * VELOCITY;
     _timeWithPowerupEffect = duration;
 }

@@ -23,6 +23,7 @@ public:
     int getPowerupsSpawned();
     std::pair<POWERUPS, float> getPowerupInEffect();
 
+    const std::vector<std::shared_ptr<IEffect>>& getEffects() { return _currentEffects; }
 private:
     sf::RenderWindow* _window;
     Paddle* _paddle;
