@@ -18,7 +18,7 @@ public:
 	void SetPosition(sf::Vector2f position);
 
 	//Powerup lifecycle
-	void AddEffect(IEffect* effect);
+	void AddEffect(BaseEffect* effect);
 	void Update(float dt);
 	void Render();
 	void ApplyEffect();
@@ -28,7 +28,7 @@ public:
 	bool ShouldBeDestroyed() { return _shouldBeDestroyed; }
 
 	//Get effects
-	const std::vector<std::shared_ptr<IEffect>>& getEffects();
+	const std::vector<std::shared_ptr<BaseEffect>>& getEffects();
 private:
 	//Rendering
 	sf::RenderWindow* _window;
@@ -37,7 +37,7 @@ private:
 
 	sf::Vector2f _velocity;
 
-	std::vector<std::shared_ptr<IEffect>> _effects;
+	std::vector<std::shared_ptr<BaseEffect>> _effects;
 
 	bool _shouldBeDestroyed;
 };

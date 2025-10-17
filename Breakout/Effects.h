@@ -6,7 +6,7 @@ class Paddle;
 class Ball;
 
 //Not really an interface anymore
-class IEffect
+class BaseEffect
 {
 public:
 	virtual void ApplyEffect(float duration) { _durationLeft = duration; }
@@ -14,7 +14,7 @@ public:
 
 	virtual void UpdateEffect(float dt);
 
-	virtual IEffect* CopyEffect() = 0; 
+	virtual BaseEffect* CopyEffect() = 0; 
 
 	virtual std::string GetName() { return "Default effect name"; }
 
@@ -26,7 +26,7 @@ private:
 	bool _shouldBeDestroyed;
 };
 
-class DebugEffect : public IEffect
+class DebugEffect : public BaseEffect
 {
 public:
 	DebugEffect(const std::string& _debugMessage = "Hello, World!");
@@ -37,10 +37,10 @@ public:
 
 	std::string GetName() override { return "Debug"; }
 
-	IEffect* CopyEffect();
+	BaseEffect* CopyEffect();
 };
 
-class PaddleSizeEffect : public IEffect
+class PaddleSizeEffect : public BaseEffect
 {
 public:
 	PaddleSizeEffect(Paddle* paddle, float _paddleSizeMultiplier = 1.0f);
@@ -50,13 +50,13 @@ public:
 
 	std::string GetName() override { return "Paddle size"; }
 
-	IEffect* CopyEffect();
+	BaseEffect* CopyEffect();
 private:
 	Paddle* paddle;
 	float _paddleSizeMultiplier;
 };
 
-class BallSpeedEffect : public IEffect
+class BallSpeedEffect : public BaseEffect
 {
 public:
 	BallSpeedEffect(Ball* ball, float ballSpeedMultiplier = 1.0f);
@@ -66,13 +66,13 @@ public:
 
 	std::string GetName() override { return "Ball speed"; }
 
-	IEffect* CopyEffect();
+	BaseEffect* CopyEffect();
 private:
 	Ball* ball;
 	float ballSpeedMultiplier;
 };
 
-class FireBallEffect : public IEffect
+class FireBallEffect : public BaseEffect
 {
 public:
 	FireBallEffect(Ball* ball);
@@ -82,7 +82,7 @@ public:
 
 	std::string GetName() override { return "Fire ball"; }
 
-	IEffect* CopyEffect();
+	BaseEffect* CopyEffect();
 private:
 	Ball* _ball;
 };

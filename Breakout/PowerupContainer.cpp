@@ -17,7 +17,7 @@ PowerupContainer::PowerupContainer(PowerupContainer& first)
 	, _sprite{ first._sprite }, _shouldBeDestroyed{ false }
 {
 	//Copy effects (uses custom function that circumvents copy constructor limitations)
-	for (std::shared_ptr<IEffect>& effect : first._effects)
+	for (std::shared_ptr<BaseEffect>& effect : first._effects)
 	{
 		_effects.emplace_back(effect->CopyEffect());
 	}
@@ -28,7 +28,7 @@ void PowerupContainer::SetPosition(sf::Vector2f position)
 	_sprite.setPosition(position);
 }
 
-void PowerupContainer::AddEffect(IEffect* effect)
+void PowerupContainer::AddEffect(BaseEffect* effect)
 {
 	_effects.emplace_back(effect);
 }
@@ -52,7 +52,7 @@ void PowerupContainer::Render()
 
 void PowerupContainer::ApplyEffect()
 {
-	for (std::shared_ptr<IEffect>& effect : _effects)
+	for (std::shared_ptr<BaseEffect>& effect : _effects)
 	{
 		effect->ApplyEffect(2.0f);
 	}
@@ -69,7 +69,7 @@ bool PowerupContainer::CheckCollisionWithPaddle(Paddle* paddle)
 	return false;
 }
 
-const std::vector<std::shared_ptr<IEffect>>& PowerupContainer::getEffects()
+const std::vector<std::shared_ptr<BaseEffect>>& PowerupContainer::getEffects()
 {
 	return _effects;
 }

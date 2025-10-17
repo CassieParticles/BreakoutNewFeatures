@@ -23,7 +23,7 @@ public:
     int getPowerupsSpawned();
     std::pair<POWERUPS, float> getPowerupInEffect();
 
-    const std::vector<std::shared_ptr<IEffect>>& getEffects() { return _currentEffects; }
+    const std::vector<std::shared_ptr<BaseEffect>>& getEffects() { return _currentEffects; }
 private:
     sf::RenderWindow* _window;
     Paddle* _paddle;
@@ -31,7 +31,7 @@ private:
 
     std::vector<PowerupContainer*> _powerups;
 
-    std::vector<std::shared_ptr<IEffect>> _currentEffects;
+    std::vector<std::shared_ptr<BaseEffect>> _currentEffects;
 
     std::optional<std::pair<POWERUPS, float>> _powerupInEffect;    // used for gameManager to get reference.
 

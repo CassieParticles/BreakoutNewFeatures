@@ -31,7 +31,7 @@ UI::~UI()
 }
 
 
-void UI::updatePowerupText(const std::vector<std::shared_ptr<IEffect>> effects)
+void UI::updatePowerupText(const std::vector<std::shared_ptr<BaseEffect>> effects)
 {
 	std::ostringstream oss;
 
