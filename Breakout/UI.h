@@ -13,7 +13,7 @@ public:
 	UI(sf::RenderWindow* window, int lives, GameManager* gameManager);
 	~UI();
 
-	void updatePowerupText(std::pair<POWERUPS, float>);
+	void updatePowerupText(const std::vector<std::shared_ptr<BaseEffect>> effects);
 	void lifeLost(int lives);
 	void render();
 

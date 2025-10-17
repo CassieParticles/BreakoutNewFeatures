@@ -30,8 +30,7 @@ void GameManager::initialize()
 
 void GameManager::update(float dt)
 {
-    _powerupInEffect = _powerupManager->getPowerupInEffect();
-    _ui->updatePowerupText(_powerupInEffect);
+    _ui->updatePowerupText(_powerupManager->getEffects());
     _powerupInEffect.second -= dt;
     
 
@@ -73,7 +72,8 @@ void GameManager::update(float dt)
 
     if (_time > _timeLastPowerupSpawned + POWERUP_FREQUENCY && rand()%700 == 0)      // TODO parameterise
     {
-        _powerupManager->spawnPowerup();
+        float initialX = rand() % _window->getSize().x * 0.9 + _window->getSize().x * 0.05;
+        _powerupManager->spawnPowerup(sf::Vector2f(initialX,5));
         _timeLastPowerupSpawned = _time;
     }
 

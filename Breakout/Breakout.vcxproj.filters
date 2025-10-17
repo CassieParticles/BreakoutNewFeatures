@@ -16,6 +16,9 @@
     <Filter Include="Powerups">
       <UniqueIdentifier>{f3758f5c-ad80-41b1-a2fb-fb910363ec2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NewPowerupSystem">
+      <UniqueIdentifier>{7224503e-8ee4-444a-8e5b-9bd4e54570ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,26 +45,14 @@
     <ClCompile Include="PowerupManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PowerupBase.cpp">
-      <Filter>Powerups</Filter>
-    </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PowerupBigPaddle.cpp">
-      <Filter>Powerups</Filter>
+    <ClCompile Include="PowerupContainer.cpp">
+      <Filter>NewPowerupSystem</Filter>
     </ClCompile>
-    <ClCompile Include="PowerupSlowBall.cpp">
-      <Filter>Powerups</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerupSmallPaddle.cpp">
-      <Filter>Powerups</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerupFastBall.cpp">
-      <Filter>Powerups</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerupFireBall.cpp">
-      <Filter>Powerups</Filter>
+    <ClCompile Include="Effects.cpp">
+      <Filter>NewPowerupSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,29 +77,17 @@
     <ClInclude Include="PowerupManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PowerupBase.h">
-      <Filter>Powerups</Filter>
-    </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerupBigPaddle.h">
-      <Filter>Powerups</Filter>
     </ClInclude>
     <ClInclude Include="CONSTANTS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PowerupSlowBall.h">
-      <Filter>Powerups</Filter>
+    <ClInclude Include="Effects.h">
+      <Filter>NewPowerupSystem</Filter>
     </ClInclude>
-    <ClInclude Include="PowerupSmallPaddle.h">
-      <Filter>Powerups</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerupFastBall.h">
-      <Filter>Powerups</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerupFireBall.h">
-      <Filter>Powerups</Filter>
+    <ClInclude Include="PowerupContainer.h">
+      <Filter>NewPowerupSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

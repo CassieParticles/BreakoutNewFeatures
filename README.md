@@ -32,4 +32,18 @@ fire ball (green)
 * Implement commentary with calls to an LLM such as LLama
 
 # Time Details and Changelist
-<Add information to this section about the time you've taken for this task along with a professional changelist.>
+12:50-13:00 - Fixed circular dependency
+
+17:00-20:15 - Refactored and overhauled powerup system, remanaged object responsibilities
+Powerups now work on a composition based system, where powerups can be made up using effects, effects can be created by making a class inherit from the BaseEffect and overriding the virtual member functions (ApplyEffect, EndEffect, CopyEffect, GetName)
+ApplyEffect needs to call the BaseEffect ApplyEffect function and CopyEffect needs to return a new identical copy of the effect. EndEffect needs to fully reverse what ApplyEffect did, so if ApplyEffect added 1 to ball size, EndEffect needs to subtract 1
+Adding new powerups is done in the powerupManager InitialisePowerups function, define a new PowerupContainer, add the effects wanted using the AddEffect function, then add the new powerup to the templatePowerups vector, new powerups will be selected from that vector
+Powerups and effects are managed by the PowerupManager, spawning powerups are created by cloning a powerup from the template vector.
+The UI displaying powerups now displays active effects, this displays the name given by GetName, and how long that effect will run for, this can display multiple effects simultaneously
+
+I chose to make this change to reduce the need for shotgun surgery within the project whenever a new powerup is added. This is a problem as it increases the implementation time of new powerups being added, which reduces the amount of iteration that can be done. 
+It also runs the problem of a developer forgetting to change any of the specific systems that require updating, introducing new bugs that could be avoided. Additionally, all the systems were built to only have one active powerup at a time, which means if a 
+designer wanted the player to have multiple active powerups, they couldn't.
+
+Overall the new system is designed to be more usable for adding new powerups and effects, and reduce the responsibilities of other systems to keep up to date with the current powerups
+
