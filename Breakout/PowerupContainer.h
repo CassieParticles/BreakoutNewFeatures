@@ -19,6 +19,8 @@ public:
 	void Update(float dt);
 
 	void Render();
+
+	void ApplyEffect();
 private:
 	//Rendering
 	sf::RenderWindow* window;

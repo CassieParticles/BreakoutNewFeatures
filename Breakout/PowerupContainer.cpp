@@ -4,6 +4,7 @@
 
 PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :window{ window }, color{ color }, velocity{ 0,250.f }
 {
+	sprite.setRadius(POWERUP_RADIUS);
 }
 
 void PowerupContainer::AddEffect(IEffect* effect)
@@ -23,4 +24,12 @@ void PowerupContainer::Update(float dt)
 void PowerupContainer::Render()
 {
 	window->draw(sprite);
+}
+
+void PowerupContainer::ApplyEffect()
+{
+	for (std::unique_ptr<IEffect>& effect : effects)
+	{
+		effect->ApplyEffect(5.0f);
+	}
 }
