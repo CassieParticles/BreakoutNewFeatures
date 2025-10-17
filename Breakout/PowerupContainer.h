@@ -13,6 +13,7 @@ class PowerupContainer
 {
 public:
 	PowerupContainer(sf::RenderWindow* window, sf::Color color);
+	PowerupContainer(PowerupContainer& first);
 
 	void AddEffect(IEffect* effect);
 

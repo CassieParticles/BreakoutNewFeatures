@@ -7,6 +7,17 @@ PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :w
 	sprite.setRadius(POWERUP_RADIUS);
 }
 
+PowerupContainer::PowerupContainer(PowerupContainer& first) 
+	:window{ first.window },color{first.color},velocity{first.velocity}
+	,sprite{first.sprite}
+{
+	//Copy effects (uses custom function that circumvents copy constructor limitations)
+	for (std::unique_ptr<IEffect>& effect : first.effects)
+	{
+		effects.emplace_back(effect->CopyEffect());
+	}
+}
+
 void PowerupContainer::AddEffect(IEffect* effect)
 {
 	effects.emplace_back(effect);
