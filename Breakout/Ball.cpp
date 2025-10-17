@@ -84,7 +84,6 @@ void Ball::render()
 
 void Ball::setVelocity(float coeff)
 {
-    std::cout << coeff << '\n';
     _velocity*=coeff;
 }
 
