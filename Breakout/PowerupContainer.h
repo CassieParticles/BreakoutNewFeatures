@@ -22,6 +22,8 @@ public:
 	void Render();
 
 	void ApplyEffect();
+
+	bool ShouldBeDestroyed() { return shouldBeDestroyed; }
 private:
 	//Rendering
 	sf::RenderWindow* window;
@@ -31,4 +33,6 @@ private:
 	sf::Vector2f velocity;
 
 	std::vector<std::unique_ptr<IEffect>> effects;
+
+	bool shouldBeDestroyed;
 };

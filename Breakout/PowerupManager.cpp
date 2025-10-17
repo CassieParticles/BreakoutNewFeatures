@@ -4,8 +4,11 @@
 
 
 PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball)
-    : _window(window), _paddle(paddle), _ball(ball), powerup{nullptr}
+    : _window(window), _paddle(paddle), _ball(ball)
 {
+    templateContainer = new PowerupContainer(_window, sf::Color::Red);
+    templateContainer->AddEffect(new DebugEffect("Effect applied"));
+    templateContainer->AddEffect(new BallSpeedEffect(_ball, 0.2f));
 }
 
 PowerupManager::~PowerupManager()
@@ -19,10 +22,6 @@ PowerupManager::~PowerupManager()
 
 void PowerupManager::update(float dt)
 {
-    if (powerup)
-    {
-        powerup->Update(dt);
-    }
 
 
     // tick down powerup effect time. Reset if elapsed.
@@ -35,23 +34,37 @@ void PowerupManager::update(float dt)
         }
     }
 
-
-    for (auto it = _powerups.begin(); it != _powerups.end(); )
+    for (auto it = powerups.begin(); it != powerups.end();)
     {
-        checkCollision();
-        
-        // Delete powerups queued for removal
-        (*it)->update(dt);
-        if (!(*it)->isAlive())
+        (*it)->Update(dt);
+        if ((*it)->ShouldBeDestroyed())
         {
-            delete* it;
-            it = _powerups.erase(it);
+            delete *it;
+            it = powerups.erase(it);
         }
         else
         {
             ++it;
         }
     }
+
+
+    //for (auto it = _powerups.begin(); it != _powerups.end(); )
+    //{
+    //    checkCollision();
+    //    
+    //    // Delete powerups queued for removal
+    //    (*it)->update(dt);
+    //    if (!(*it)->isAlive())
+    //    {
+    //        delete* it;
+    //        it = _powerups.erase(it);
+    //    }
+    //    else
+    //    {
+    //        ++it;
+    //    }
+    //}
 }
 
 void PowerupManager::render()
@@ -60,7 +73,7 @@ void PowerupManager::render()
     {
         powerup->render();
     }
-    if (powerup)
+    for (auto& powerup : powerups)
     {
         powerup->Render();
     }
@@ -68,40 +81,9 @@ void PowerupManager::render()
 
 void PowerupManager::spawnPowerup()
 {
+    //TODO: Add powerup spawning
 
-    //// TODO finish this.
-    //switch (rand() % 5)
-    //{
-    //case 0:
-    //    _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _ball));
-    //    break;
-    //case 1:
-    //    _powerups.push_back(new PowerupSlowBall(_window, _paddle, _ball));
-    //    break;
-    //case 2:
-    //    _powerups.push_back(new PowerupFastBall(_window, _paddle, _ball));
-    //    break;
-    //case 3:
-    //    _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _ball));
-    //    break;
-    //case 4:
-    //    _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
-    //    break;
-    //case 5:
-    //   break;
-    //}
-
-    if (!powerup)
-    {
-        powerup = new PowerupContainer(_window, sf::Color::Red);
-        powerup->AddEffect(new PaddleSizeEffect( _paddle, 1.5f ));
-        powerup->AddEffect(new DebugEffect("Powerup activated"));
-        powerup->AddEffect(new BallSpeedEffect(_ball, 2.0f));
-
-        powerup->ApplyEffect();
-    }
-
-
+    powerups.push_back(new PowerupContainer(*templateContainer));
 }
 
 void PowerupManager::checkCollision()

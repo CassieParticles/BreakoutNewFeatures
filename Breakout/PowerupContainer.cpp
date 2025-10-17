@@ -29,8 +29,12 @@ void PowerupContainer::Update(float dt)
 	sprite.move(velocity * dt);
 
 	//TODO: Handle collision with player in player
-	// 
-	//TODO: Handle destruction when hitting floor
+	
+	//Flag for destruction once object should be destroyed
+	if (sprite.getPosition().y + sprite.getRadius() * 2 >= window->getSize().y)
+	{
+		shouldBeDestroyed = true;
+	}
 }
 
 void PowerupContainer::Render()
@@ -42,6 +46,6 @@ void PowerupContainer::ApplyEffect()
 {
 	for (std::unique_ptr<IEffect>& effect : effects)
 	{
-		effect->ApplyEffect(5.0f);
+		effect->ApplyEffect(2.0f);
 	}
 }
