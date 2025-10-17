@@ -1,9 +1,10 @@
 #include "Ball.h"
 #include "GameManager.h" // avoid cicular dependencies
+#include <iostream>
 
 Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
     : _window(window), _velocity(velocity), _gameManager(gameManager),
-    _timeWithPowerupEffect(0.f), _isFireBall(false), _isAlive(true), _direction({1,1})
+    _isFireBall(false), _isAlive(true), _direction({1,1})
 {
     _sprite.setRadius(RADIUS);
     _sprite.setFillColor(sf::Color::Cyan);
@@ -16,22 +17,6 @@ Ball::~Ball()
 
 void Ball::update(float dt)
 {
-    // check for powerup, tick down or correct
-    if (_timeWithPowerupEffect > 0.f)
-    {
-        _timeWithPowerupEffect -= dt;
-    }
-    else
-    {
-        if (_velocity != VELOCITY)
-            _velocity = VELOCITY;   // reset speed.
-        else
-        {
-            setFireBall(0);    // disable fireball
-            _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
-        }        
-    }
-
     // Fireball effect
     if (_isFireBall)
     {
@@ -97,22 +82,17 @@ void Ball::render()
     _window->draw(_sprite);
 }
 
-void Ball::setVelocity(float coeff, float duration)
+void Ball::setVelocity(float coeff)
 {
-    //TODO: REMOVE SELF CORRECTING SPEED, THIS SHOULD BE HANDLED BY POWERUP
-
-    _velocity = coeff * VELOCITY;
-    _timeWithPowerupEffect = duration;
+    std::cout << coeff << '\n';
+    _velocity*=coeff;
 }
 
-void Ball::setFireBall(float duration)
+void Ball::setFireBall(bool fireball)
 {
-    if (duration) 
+    _isFireBall = fireball;       
+    if(!fireball)
     {
-        _isFireBall = true;
-        _timeWithPowerupEffect = duration;        
-        return;
+        _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
     }
-    _isFireBall = false;
-    _timeWithPowerupEffect = 0.f;    
 }

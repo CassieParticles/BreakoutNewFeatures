@@ -35,14 +35,7 @@ void Paddle::moveRight(float dt)
 
 void Paddle::update(float dt)
 {
-    if (_timeInNewSize > 0)
-    {
-        _timeInNewSize -= dt;
-    }
-    else
-    {
-        setWidth(1.0f, 0.0f); // Reset to default width after duration
-    }
+
 }
 
 void Paddle::render()
@@ -57,13 +50,12 @@ sf::FloatRect Paddle::getBounds() const
 
 // update width by SF of coeff. 
 // ensure centre remains consistent.
-void Paddle::setWidth(float coeff, float duration)
+void Paddle::setWidth(float coeff)
 {
     //TODO: REMOVE SELF CORRECTING SIZE, THIS SHOULD BE HANDLED BY POWERUP
 
-    _width = coeff * PADDLE_WIDTH;
+    _width*=coeff;
     _sprite.setSize(sf::Vector2f(_width, _sprite.getSize().y));
-    _timeInNewSize = duration;
     float newX = _sprite.getPosition().x + (_width - PADDLE_WIDTH) / 2;
     _sprite.setPosition(newX, _sprite.getPosition().y);
 }

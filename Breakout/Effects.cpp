@@ -34,12 +34,12 @@ FireBallEffect::FireBallEffect(Ball* ball):_ball{ball}
 void FireBallEffect::ApplyEffect(float duration)
 {
 	IEffect::ApplyEffect(duration);
-	_ball->setFireBall(duration);
+	_ball->setFireBall(true);
 }
 
 void FireBallEffect::EndEffect()
 {
-	//TODO: End Fireball
+	_ball->setFireBall(false);
 }
 
 IEffect* FireBallEffect::CopyEffect()
@@ -58,12 +58,12 @@ PaddleSizeEffect::PaddleSizeEffect(Paddle* paddle, float _paddleSizeMultiplier) 
 void PaddleSizeEffect::ApplyEffect(float duration)
 {
 	IEffect::ApplyEffect(duration);
-	paddle->setWidth(_paddleSizeMultiplier, duration);
+	paddle->setWidth(_paddleSizeMultiplier);
 }
 
 void PaddleSizeEffect::EndEffect()
 {
-	paddle->setWidth(1/_paddleSizeMultiplier, 0.0f);
+	paddle->setWidth(1/_paddleSizeMultiplier);
 }
 
 
@@ -78,12 +78,12 @@ BallSpeedEffect::BallSpeedEffect(Ball* ball, float ballSpeedMultiplier):ball{bal
 void BallSpeedEffect::ApplyEffect(float duration)
 {
 	IEffect::ApplyEffect(duration);
-	ball->setVelocity(ballSpeedMultiplier, duration);
+	ball->setVelocity(ballSpeedMultiplier);
 }
 
 void BallSpeedEffect::EndEffect()
 {
-	ball->setVelocity(1 / ballSpeedMultiplier, 0.0f);
+	ball->setVelocity(1.0f / ballSpeedMultiplier);
 }
 
 IEffect* BallSpeedEffect::CopyEffect()
