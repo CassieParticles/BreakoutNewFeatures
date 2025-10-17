@@ -30,8 +30,7 @@ void GameManager::initialize()
 
 void GameManager::update(float dt)
 {
-    _powerupInEffect = _powerupManager->getPowerupInEffect();
-    _ui->updatePowerupText(_powerupInEffect);
+    _ui->updatePowerupText(_powerupManager->getEffects());
     _powerupInEffect.second -= dt;
     
 

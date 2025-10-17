@@ -16,6 +16,8 @@ public:
 
 	virtual IEffect* CopyEffect() = 0; 
 
+	virtual std::string GetName() { return "Default effect name"; }
+
 	bool ShouldBeDestroyed() { return _shouldBeDestroyed; }
 	float getDurationLeft() { return _durationLeft; }
 
@@ -33,6 +35,7 @@ public:
 	void ApplyEffect(float duration) override;
 	void EndEffect() {}
 
+	std::string GetName() override { return "Debug"; }
 
 	IEffect* CopyEffect();
 };
@@ -45,6 +48,7 @@ public:
 	void ApplyEffect(float duration) override;
 	void EndEffect();
 
+	std::string GetName() override { return "Paddle size"; }
 
 	IEffect* CopyEffect();
 private:
@@ -60,6 +64,7 @@ public:
 	void ApplyEffect(float duration) override;
 	void EndEffect();
 
+	std::string GetName() override { return "Ball speed"; }
 
 	IEffect* CopyEffect();
 private:
