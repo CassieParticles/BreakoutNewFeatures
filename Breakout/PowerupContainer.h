@@ -24,8 +24,11 @@ public:
 	void ApplyEffect();
 
 	//Checks
-	void CheckCollisionWithPaddle(Paddle* paddle);
+	bool CheckCollisionWithPaddle(Paddle* paddle);
 	bool ShouldBeDestroyed() { return _shouldBeDestroyed; }
+
+	//Get effects
+	const std::vector<std::shared_ptr<IEffect>>& getEffects();
 private:
 	//Rendering
 	sf::RenderWindow* _window;
@@ -34,7 +37,7 @@ private:
 
 	sf::Vector2f _velocity;
 
-	std::vector<std::unique_ptr<IEffect>> _effects;
+	std::vector<std::shared_ptr<IEffect>> _effects;
 
 	bool _shouldBeDestroyed;
 };

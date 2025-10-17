@@ -37,4 +37,5 @@ fire ball (green)
 17:00-18:45 - Refactored and overhauled powerup system
 Powerups now use separate powerup containers, and effects, containers handle position, movement, triggering, and effects make changes to the game when collected
 Powerups can have multiple effects, all effects inherit from the IEffect interface
+If designers want a new powerup with unique behaviour, or one with parts of existing behaviour, it is much easier to add now
 

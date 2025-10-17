@@ -17,7 +17,7 @@ PowerupContainer::PowerupContainer(PowerupContainer& first)
 	, _sprite{ first._sprite }, _shouldBeDestroyed{ false }
 {
 	//Copy effects (uses custom function that circumvents copy constructor limitations)
-	for (std::unique_ptr<IEffect>& effect : first._effects)
+	for (std::shared_ptr<IEffect>& effect : first._effects)
 	{
 		_effects.emplace_back(effect->CopyEffect());
 	}
@@ -41,6 +41,7 @@ void PowerupContainer::Update(float dt)
 	if (_sprite.getPosition().y + _sprite.getRadius() * 2 >= _window->getSize().y)
 	{
 		_shouldBeDestroyed = true;
+		//TODO: Clear effects
 	}
 }
 
@@ -51,18 +52,24 @@ void PowerupContainer::Render()
 
 void PowerupContainer::ApplyEffect()
 {
-	for (std::unique_ptr<IEffect>& effect : _effects)
+	for (std::shared_ptr<IEffect>& effect : _effects)
 	{
 		effect->ApplyEffect(2.0f);
 	}
 }
 
-void PowerupContainer::CheckCollisionWithPaddle(Paddle* paddle)
+bool PowerupContainer::CheckCollisionWithPaddle(Paddle* paddle)
 {
 	if (_sprite.getGlobalBounds().intersects(paddle->getBounds()))
 	{
 		_shouldBeDestroyed = true;
 		ApplyEffect();
+		return true;
 	}
+	return false;
+}
 
+const std::vector<std::shared_ptr<IEffect>>& PowerupContainer::getEffects()
+{
+	return _effects;
 }

@@ -9,9 +9,6 @@ PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* b
     InitialisePowerups();
 }
 
-
-
-
 PowerupManager::~PowerupManager()
 {
     for (PowerupContainer* container : _powerups)
@@ -36,6 +33,7 @@ void PowerupManager::update(float dt)
 
     checkPlayerCollision();
 
+    //Update and clean up powerups
     for (auto it = _powerups.begin(); it != _powerups.end();)
     {
         (*it)->Update(dt);
@@ -50,6 +48,19 @@ void PowerupManager::update(float dt)
         }
     }
 
+    //Update and clean up effects
+    for (auto it = _currentEffects.begin(); it != _currentEffects.end();)
+    {
+        (*it)->UpdateEffect(dt);
+        if ((*it)->ShouldBeDestroyed())
+        {
+            it = _currentEffects.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
 }
 
 void PowerupManager::render()
@@ -76,7 +87,11 @@ void PowerupManager::checkPlayerCollision()
 {
     for (auto& powerup : _powerups)
     {
-        powerup->CheckCollisionWithPaddle(_paddle);
+        if (powerup->CheckCollisionWithPaddle(_paddle))
+        {
+            //Powerup collided, get it's effects
+            _currentEffects.insert(_currentEffects.begin(), powerup->getEffects().begin(), powerup->getEffects().end());
+        }
     }
 }
 

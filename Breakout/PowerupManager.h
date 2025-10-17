@@ -30,6 +30,8 @@ private:
 
     std::vector<PowerupContainer*> _powerups;
 
+    std::vector<std::shared_ptr<IEffect>> _currentEffects;
+
     std::optional<std::pair<POWERUPS, float>> _powerupInEffect;    // used for gameManager to get reference.
 
     std::vector<PowerupContainer*> templatePowerups;

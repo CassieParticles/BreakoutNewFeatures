@@ -5,31 +5,51 @@
 #include "Paddle.h"
 #include "Ball.h"
 
-DebugEffect::DebugEffect(const std::string& debugMessage) :debugMessage{ debugMessage }
+void IEffect::UpdateEffect(float dt)
+{
+	_durationLeft -= dt;
+
+	if (_durationLeft < 0)
+	{
+		EndEffect();
+		_shouldBeDestroyed = true;
+	}
+}
+
+
+DebugEffect::DebugEffect(const std::string& _debugMessage) :_debugMessage{ _debugMessage }
 {
 }
 
 void DebugEffect::ApplyEffect(float duration)
 {
-	std::cout << debugMessage << '\n';
+	IEffect::ApplyEffect(duration);
+	std::cout << _debugMessage << '\n';
 }
 
 IEffect* DebugEffect::CopyEffect()
 {
-	return new DebugEffect(debugMessage);
+	return new DebugEffect(_debugMessage);
 }
 
-PaddleSizeEffect::PaddleSizeEffect(Paddle* paddle, float paddleSizeMultiplier) :paddle{ paddle },paddleSizeMultiplier{paddleSizeMultiplier}
+PaddleSizeEffect::PaddleSizeEffect(Paddle* paddle, float _paddleSizeMultiplier) :paddle{ paddle },_paddleSizeMultiplier{_paddleSizeMultiplier}
 {}
 
 void PaddleSizeEffect::ApplyEffect(float duration)
 {
-	paddle->setWidth(paddleSizeMultiplier, duration);
+	IEffect::ApplyEffect(duration);
+	paddle->setWidth(_paddleSizeMultiplier, duration);
 }
+
+void PaddleSizeEffect::EndEffect()
+{
+	paddle->setWidth(1/_paddleSizeMultiplier, 0.0f);
+}
+
 
 IEffect* PaddleSizeEffect::CopyEffect()
 {
-	return new PaddleSizeEffect(paddle, paddleSizeMultiplier);
+	return new PaddleSizeEffect(paddle, _paddleSizeMultiplier);
 }
 
 BallSpeedEffect::BallSpeedEffect(Ball* ball, float ballSpeedMultiplier):ball{ball},ballSpeedMultiplier{ballSpeedMultiplier}
@@ -37,7 +57,13 @@ BallSpeedEffect::BallSpeedEffect(Ball* ball, float ballSpeedMultiplier):ball{bal
 
 void BallSpeedEffect::ApplyEffect(float duration)
 {
+	IEffect::ApplyEffect(duration);
 	ball->setVelocity(ballSpeedMultiplier, duration);
+}
+
+void BallSpeedEffect::EndEffect()
+{
+	ball->setVelocity(1 / ballSpeedMultiplier, 0.0f);
 }
 
 IEffect* BallSpeedEffect::CopyEffect()
