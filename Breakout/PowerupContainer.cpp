@@ -2,9 +2,10 @@
 
 #include "CONSTANTS.h"
 
-PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :window{ window }, color{ color }, velocity{ 0,250.f }
+PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) :window{ window }, color{ color }, velocity{ 0,250.f },shouldBeDestroyed{false}
 {
 	sprite.setRadius(POWERUP_RADIUS);
+	sprite.setFillColor(color);
 }
 
 PowerupContainer::PowerupContainer(PowerupContainer& first) 
