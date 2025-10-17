@@ -33,7 +33,7 @@ public:
 	std::string _debugMessage;
 
 	void ApplyEffect(float duration) override;
-	void EndEffect() {}
+	void EndEffect() override {}
 
 	std::string GetName() override { return "Debug"; }
 
@@ -46,7 +46,7 @@ public:
 	PaddleSizeEffect(Paddle* paddle, float _paddleSizeMultiplier = 1.0f);
 	
 	void ApplyEffect(float duration) override;
-	void EndEffect();
+	void EndEffect() override;
 
 	std::string GetName() override { return "Paddle size"; }
 
@@ -62,7 +62,7 @@ public:
 	BallSpeedEffect(Ball* ball, float ballSpeedMultiplier = 1.0f);
 
 	void ApplyEffect(float duration) override;
-	void EndEffect();
+	void EndEffect() override;
 
 	std::string GetName() override { return "Ball speed"; }
 
@@ -78,7 +78,7 @@ public:
 	FireBallEffect(Ball* ball);
 
 	void ApplyEffect(float duration) override;
-	void EndEffect();
+	void EndEffect() override;
 
 	std::string GetName() override { return "Fire ball"; }
 
