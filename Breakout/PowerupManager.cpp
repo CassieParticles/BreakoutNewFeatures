@@ -1,8 +1,10 @@
 #include "PowerupManager.h"
 
+#include <iostream>
+
 
 PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball)
-    : _window(window), _paddle(paddle), _ball(ball)
+    : _window(window), _paddle(paddle), _ball(ball), powerup{nullptr}
 {
 }
 
@@ -17,6 +19,12 @@ PowerupManager::~PowerupManager()
 
 void PowerupManager::update(float dt)
 {
+    if (powerup)
+    {
+        powerup->Update(dt);
+    }
+
+
     // tick down powerup effect time. Reset if elapsed.
     if (_powerupInEffect)
     {
@@ -52,32 +60,47 @@ void PowerupManager::render()
     {
         powerup->render();
     }
+    if (powerup)
+    {
+        powerup->Render();
+    }
 }
 
 void PowerupManager::spawnPowerup()
 {
 
-    // TODO finish this.
-    switch (rand() % 5)
+    //// TODO finish this.
+    //switch (rand() % 5)
+    //{
+    //case 0:
+    //    _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _ball));
+    //    break;
+    //case 1:
+    //    _powerups.push_back(new PowerupSlowBall(_window, _paddle, _ball));
+    //    break;
+    //case 2:
+    //    _powerups.push_back(new PowerupFastBall(_window, _paddle, _ball));
+    //    break;
+    //case 3:
+    //    _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _ball));
+    //    break;
+    //case 4:
+    //    _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
+    //    break;
+    //case 5:
+    //   break;
+    //}
+
+    if (!powerup)
     {
-    case 0:
-        _powerups.push_back(new PowerupBigPaddle(_window, _paddle, _ball));
-        break;
-    case 1:
-        _powerups.push_back(new PowerupSlowBall(_window, _paddle, _ball));
-        break;
-    case 2:
-        _powerups.push_back(new PowerupFastBall(_window, _paddle, _ball));
-        break;
-    case 3:
-        _powerups.push_back(new PowerupSmallPaddle(_window, _paddle, _ball));
-        break;
-    case 4:
-        _powerups.push_back(new PowerupFireBall(_window, _paddle, _ball));
-        break;
-    case 5:
-       break;
+        powerup = new PowerupContainer(_window, sf::Color::Red);
+        powerup->AddEffect(new PaddleSizeEffect( _paddle, 1.5f ));
+        powerup->AddEffect(new DebugEffect("Powerup activated"));
+        powerup->AddEffect(new BallSpeedEffect(_ball, 2.0f));
+
+        powerup->ApplyEffect();
     }
+
 
 }
 

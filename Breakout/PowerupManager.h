@@ -12,6 +12,9 @@
 #include "Paddle.h"
 #include "Ball.h"
 
+#include "PowerupContainer.h"
+#include "Effects.h"
+
 
 class PowerupManager
 {
@@ -32,4 +35,6 @@ private:
     Ball* _ball;
     std::vector<PowerupBase*> _powerups;            // used to manage deletion.
     std::optional<std::pair<POWERUPS, float>> _powerupInEffect;    // used for gameManager to get reference.
+
+    PowerupContainer* powerup;
 };
