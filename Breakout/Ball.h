@@ -13,9 +13,12 @@ public:
     void update(float dt);
     void render();
     void setVelocity(float coeff);
-    void setFireBall(bool fireball);
-    void setSticky(bool sticky); 
-    void setGodmode(bool isGodmode);
+    void addFireBall() { _fireBallCount++; }
+    void addSticky() { _StickyBallCount++; }
+    void addGodmode() { _GodmodeCount++; }
+    void subFireBall() { _fireBallCount--; }
+    void subSticky() { _StickyBallCount--; }
+    void subGodmode() { _GodmodeCount--; }
     void setSize(float coeff);
 
 private:
@@ -24,9 +27,10 @@ private:
     sf::RenderWindow* _window;
     float _velocity;
     bool _isAlive;
-    bool _isFireBall;
-    bool _isSticky;
-    bool _isGodmode;
+
+    int _fireBallCount{ 0 };
+    int _StickyBallCount{ 0 };
+    int _GodmodeCount{ 0 };
 
     bool _isStuck;
     sf::Vector2f _stuckDirection;

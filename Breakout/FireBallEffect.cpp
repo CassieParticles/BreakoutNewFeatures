@@ -9,12 +9,12 @@ FireBallEffect::FireBallEffect(Ball* ball) :_ball{ ball }
 void FireBallEffect::ApplyEffect(float duration)
 {
 	BaseEffect::ApplyEffect(duration);
-	_ball->setFireBall(true);
+	_ball->addFireBall();
 }
 
 void FireBallEffect::EndEffect()
 {
-	_ball->setFireBall(false);
+	_ball->subFireBall();
 }
 
 BaseEffect* FireBallEffect::CopyEffect()

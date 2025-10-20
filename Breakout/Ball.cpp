@@ -4,7 +4,7 @@
 
 Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
     : _window(window), _velocity(velocity), _gameManager(gameManager),
-    _isFireBall(false), _isAlive(true), _direction({1,1})
+     _isAlive(true), _direction({1,1})
 {
     _sprite.setRadius(RADIUS);
     _sprite.setFillColor(sf::Color::Cyan);
@@ -22,7 +22,7 @@ void Ball::update(float dt)
         Paddle* paddle = _gameManager->getPaddle();
         _sprite.setPosition(paddle->getPosition() + sf::Vector2f(paddle->getBounds().width / 2, -_sprite.getRadius() / 2 - 5));
         //Stickiness wears off, or player launches with space
-        if (!_isSticky || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        if (!_StickyBallCount || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             _direction = _stuckDirection;
             _stuckDirection = sf::Vector2f(0, 0);
@@ -33,7 +33,7 @@ void Ball::update(float dt)
 
 
     // Fireball effect
-    if (_isFireBall)
+    if (_fireBallCount)
     {
         // Flickering effect
         int flicker = rand() % 50 + 205; // Random value between 205 and 255
@@ -63,7 +63,7 @@ void Ball::update(float dt)
     if (position.y > windowDimensions.y)
     {
         //Lose life if godmode is false
-        if (_isGodmode)
+        if (_GodmodeCount)
         {
             _direction.y *= -1;
         }
@@ -79,7 +79,7 @@ void Ball::update(float dt)
     // collision with paddle
     if (_sprite.getGlobalBounds().intersects(_gameManager->getPaddle()->getBounds()))
     {
-        if (_isSticky)
+        if (_StickyBallCount)
         {
             _isStuck = true;
             _stuckDirection = _direction;
@@ -100,7 +100,7 @@ void Ball::update(float dt)
 
     // collision with bricks
     int collisionResponse = _gameManager->getBrickManager()->checkCollision(_sprite, _direction);
-    if (_isFireBall) return; // no collisisons when in fireBall mode.
+    if (_fireBallCount) return; // no collisisons when in fireBall mode.
     if (collisionResponse == 1)
     {
         _direction.x *= -1; // Bounce horizontally
@@ -119,25 +119,6 @@ void Ball::render()
 void Ball::setVelocity(float coeff)
 {
     _velocity*=coeff;
-}
-
-void Ball::setFireBall(bool fireball)
-{
-    _isFireBall = fireball;       
-    if(!fireball)
-    {
-        _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
-    }
-}
-
-void Ball::setSticky(bool sticky)
-{
-    _isSticky = sticky;
-}
-
-void Ball::setGodmode(bool godmode)
-{
-    _isGodmode = godmode;
 }
 
 

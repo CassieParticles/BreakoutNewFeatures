@@ -10,12 +10,12 @@ void StickyBallEffect::ApplyEffect(float duration)
 {
 	BaseEffect::ApplyEffect(duration);
 
-	_ball->setSticky(true);
+	_ball->addSticky();
 }
 
 void StickyBallEffect::EndEffect()
 {
-	_ball->setSticky(false);
+	_ball->subSticky();
 }
 
 BaseEffect* StickyBallEffect::CopyEffect()
