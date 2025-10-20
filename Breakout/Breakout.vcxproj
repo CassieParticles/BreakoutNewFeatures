@@ -139,28 +139,41 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BallSizeEffect.cpp" />
+    <ClCompile Include="BallSpeedEffect.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BrickManager.cpp" />
-    <ClCompile Include="Effects.cpp" />
+    <ClCompile Include="DebugEffect.cpp" />
+    <ClCompile Include="BaseEffect.cpp" />
+    <ClCompile Include="FireBallEffect.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)/SFML/include</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="PaddleSizeEffect.cpp" />
+    <ClCompile Include="PaddleSpeedEffect.cpp" />
     <ClCompile Include="PowerupContainer.cpp" />
     <ClCompile Include="PowerupManager.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="BallSizeEffect.h" />
+    <ClInclude Include="BallSpeedEffect.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="BrickManager.h" />
     <ClInclude Include="CONSTANTS.h" />
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="DebugEffect.h" />
     <ClInclude Include="Effects.h" />
+    <ClInclude Include="FireBallEffect.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="BaseEffect.h" />
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="PaddleSizeEffect.h" />
+    <ClInclude Include="PaddleSpeedEffect.h" />
     <ClInclude Include="PowerupContainer.h" />
     <ClInclude Include="PowerupManager.h" />
     <ClInclude Include="UI.h" />
