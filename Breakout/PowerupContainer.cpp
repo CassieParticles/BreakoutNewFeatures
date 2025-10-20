@@ -4,9 +4,9 @@
 
 #include "Paddle.h"
 
-PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color) 
+PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color, float duration)
 	:_window{ window }, _color{ color }, _velocity{ 0,250.f },
-	_shouldBeDestroyed{false}
+	_shouldBeDestroyed{false},_duration{duration}
 {
 	_sprite.setRadius(POWERUP_RADIUS);
 	_sprite.setFillColor(color);
@@ -14,7 +14,7 @@ PowerupContainer::PowerupContainer(sf::RenderWindow* window, sf::Color color)
 
 PowerupContainer::PowerupContainer(PowerupContainer& first) 
 	:_window{ first._window },_color{first._color},_velocity{first._velocity}
-	, _sprite{ first._sprite }, _shouldBeDestroyed{ false }
+	, _sprite{ first._sprite }, _shouldBeDestroyed{ false },_duration{first._duration}
 {
 	//Copy effects (uses custom function that circumvents copy constructor limitations)
 	for (std::shared_ptr<BaseEffect>& effect : first._effects)
@@ -54,7 +54,7 @@ void PowerupContainer::ApplyEffect()
 {
 	for (std::shared_ptr<BaseEffect>& effect : _effects)
 	{
-		effect->ApplyEffect(2.0f);
+		effect->ApplyEffect(_duration);
 	}
 }
 

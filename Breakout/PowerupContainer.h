@@ -12,7 +12,7 @@
 class PowerupContainer
 {
 public:
-	PowerupContainer(sf::RenderWindow* window, sf::Color color);
+	PowerupContainer(sf::RenderWindow* window, sf::Color color, float duration = 5.0f);
 	PowerupContainer(PowerupContainer& first);
 	//Set up
 	void SetPosition(sf::Vector2f position);
@@ -38,6 +38,7 @@ private:
 	sf::Vector2f _velocity;
 
 	std::vector<std::shared_ptr<BaseEffect>> _effects;
+	float _duration;
 
 	bool _shouldBeDestroyed;
 };
