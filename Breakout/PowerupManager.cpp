@@ -112,10 +112,11 @@ void PowerupManager::InitialisePowerups()
     PowerupContainer* slowBall = new PowerupContainer(_window, sf::Color::Blue);
     PowerupContainer* bigPaddle = new PowerupContainer(_window, sf::Color(155,0,255));
     PowerupContainer* smallPaddle = new PowerupContainer(_window, sf::Color::Green);
+    PowerupContainer* fastPaddle = new PowerupContainer(_window, sf::Color::Cyan);
+    PowerupContainer* slowPaddle = new PowerupContainer(_window, sf::Color(255, 128, 128));
     PowerupContainer* fireBall = new PowerupContainer(_window, sf::Color::Red);
     PowerupContainer* bigBall = new PowerupContainer(_window, sf::Color::Magenta);
     PowerupContainer* smallBall = new PowerupContainer(_window, sf::Color::White);
-
 
     fastBall->AddEffect(new BallSpeedEffect(_ball, 2.0f));
     fastBall->AddEffect(new BallSizeEffect(_ball, 0.85f));
@@ -124,6 +125,8 @@ void PowerupManager::InitialisePowerups()
 
     bigPaddle->AddEffect(new PaddleSizeEffect(_paddle, 1.5f));
     smallPaddle->AddEffect(new PaddleSizeEffect(_paddle, 0.67f));
+    fastPaddle->AddEffect(new PaddleSpeedEffect(_paddle, 2.0f));
+    slowPaddle->AddEffect(new PaddleSpeedEffect(_paddle, 0.5f));
 
     fireBall->AddEffect(new FireBallEffect(_ball));
     fireBall->AddEffect(new BallSpeedEffect(_ball, 1.15f));
@@ -137,6 +140,8 @@ void PowerupManager::InitialisePowerups()
     templatePowerups.push_back(slowBall);
     templatePowerups.push_back(bigPaddle);
     templatePowerups.push_back(smallPaddle);
+    templatePowerups.push_back(fastPaddle);
+    templatePowerups.push_back(slowPaddle);
     templatePowerups.push_back(fireBall);
     templatePowerups.push_back(bigBall);
     templatePowerups.push_back(smallBall);

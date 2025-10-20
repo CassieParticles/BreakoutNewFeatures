@@ -7,3 +7,4 @@
 #include "DebugEffect.h"
 #include "FireBallEffect.h"
 #include "PaddleSizeEffect.h"
+#include "PaddleSpeedEffect.h"
