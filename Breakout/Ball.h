@@ -14,6 +14,8 @@ public:
     void render();
     void setVelocity(float coeff);
     void setFireBall(bool fireball);
+    void setSticky(bool sticky); 
+    void setGodmode(bool isGodmode);
     void setSize(float coeff);
 
 private:
@@ -23,6 +25,11 @@ private:
     float _velocity;
     bool _isAlive;
     bool _isFireBall;
+    bool _isSticky;
+    bool _isGodmode;
+
+    bool _isStuck;
+    sf::Vector2f _stuckDirection;
 
     GameManager* _gameManager;  // Reference to the GameManager
 

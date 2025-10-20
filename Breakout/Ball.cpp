@@ -17,6 +17,20 @@ Ball::~Ball()
 
 void Ball::update(float dt)
 {
+    if (_isStuck)
+    {
+        _sprite.setPosition(_gameManager->getPaddle()->getPosition() + sf::Vector2f(0, -35));
+        //Stickiness wears off, or player launches with space
+        if (!_isSticky || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            _direction = _stuckDirection;
+            _stuckDirection = sf::Vector2f(0, 0);
+            _isStuck = false;
+        }
+        return;
+    }
+
+
     // Fireball effect
     if (_isFireBall)
     {
@@ -47,21 +61,40 @@ void Ball::update(float dt)
     // lose life bounce
     if (position.y > windowDimensions.y)
     {
-        _sprite.setPosition(0, 300);
-        _direction = { 1, 1 };
-        _gameManager->loseLife();
+        //Lose life if godmode is false
+        if (_isGodmode)
+        {
+            _direction.y *= -1;
+        }
+        else
+        {      
+            _sprite.setPosition(0, 300);
+            _direction = { 1, 1 };
+            _gameManager->loseLife();
+        }
+
     }
 
     // collision with paddle
     if (_sprite.getGlobalBounds().intersects(_gameManager->getPaddle()->getBounds()))
     {
-        _direction.y *= -1; // Bounce vertically
+        if (_isSticky)
+        {
+            _isStuck = true;
+            _stuckDirection = _direction;
+            _stuckDirection.y *= -1;
+            _direction = sf::Vector2f(0, 0);
+        }
+        else
+        {
+            _direction.y *= -1; // Bounce vertically
 
-        float paddlePositionProportion = (_sprite.getPosition().x - _gameManager->getPaddle()->getBounds().left) / _gameManager->getPaddle()->getBounds().width;
-        _direction.x = paddlePositionProportion * 2.0f - 1.0f;
+            float paddlePositionProportion = (_sprite.getPosition().x - _gameManager->getPaddle()->getBounds().left) / _gameManager->getPaddle()->getBounds().width;
+            _direction.x = paddlePositionProportion * 2.0f - 1.0f;
 
-        // Adjust position to avoid getting stuck inside the paddle
-        _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
+            // Adjust position to avoid getting stuck inside the paddle
+            _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
+        }
     }
 
     // collision with bricks
@@ -95,6 +128,17 @@ void Ball::setFireBall(bool fireball)
         _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
     }
 }
+
+void Ball::setSticky(bool sticky)
+{
+    _isSticky = sticky;
+}
+
+void Ball::setGodmode(bool godmode)
+{
+    _isGodmode = godmode;
+}
+
 
 void Ball::setSize(float coeff)
 {
