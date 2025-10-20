@@ -19,7 +19,8 @@ void Ball::update(float dt)
 {
     if (_isStuck)
     {
-        _sprite.setPosition(_gameManager->getPaddle()->getPosition() + sf::Vector2f(0, -35));
+        Paddle* paddle = _gameManager->getPaddle();
+        _sprite.setPosition(paddle->getPosition() + sf::Vector2f(paddle->getBounds().width / 2, -_sprite.getRadius() / 2 - 5));
         //Stickiness wears off, or player launches with space
         if (!_isSticky || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
@@ -47,7 +48,7 @@ void Ball::update(float dt)
     sf::Vector2u windowDimensions = _window->getSize();
 
     // bounce on walls
-    if ((position.x >= windowDimensions.x - 2 * RADIUS && _direction.x > 0) || (position.x <= 0 && _direction.x < 0))
+    if ((position.x >= windowDimensions.x - 2 * _sprite.getRadius() && _direction.x > 0) || (position.x <= 0 && _direction.x < 0))
     {
         _direction.x *= -1;
     }
@@ -93,7 +94,7 @@ void Ball::update(float dt)
             _direction.x = paddlePositionProportion * 2.0f - 1.0f;
 
             // Adjust position to avoid getting stuck inside the paddle
-            _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
+            _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * _sprite.getRadius());
         }
     }
 
