@@ -72,6 +72,12 @@
     <ClCompile Include="PaddleSpeedEffect.cpp">
       <Filter>Powerups\Effects</Filter>
     </ClCompile>
+    <ClCompile Include="StickyBallEffect.cpp">
+      <Filter>Powerups\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="GodModeEffect.cpp">
+      <Filter>Powerups\Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h">
@@ -126,6 +132,12 @@
       <Filter>Powerups</Filter>
     </ClInclude>
     <ClInclude Include="PaddleSpeedEffect.h">
+      <Filter>Powerups\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="StickyBallEffect.h">
+      <Filter>Powerups\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="GodModeEffect.h">
       <Filter>Powerups\Effects</Filter>
     </ClInclude>
   </ItemGroup>

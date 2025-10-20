@@ -147,6 +147,7 @@
     <ClCompile Include="BaseEffect.cpp" />
     <ClCompile Include="FireBallEffect.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GodModeEffect.cpp" />
     <ClCompile Include="main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)/SFML/include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -156,6 +157,7 @@
     <ClCompile Include="PaddleSpeedEffect.cpp" />
     <ClCompile Include="PowerupContainer.cpp" />
     <ClCompile Include="PowerupManager.cpp" />
+    <ClCompile Include="StickyBallEffect.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,12 +172,14 @@
     <ClInclude Include="FireBallEffect.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="BaseEffect.h" />
+    <ClInclude Include="GodModeEffect.h" />
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PaddleSizeEffect.h" />
     <ClInclude Include="PaddleSpeedEffect.h" />
     <ClInclude Include="PowerupContainer.h" />
     <ClInclude Include="PowerupManager.h" />
+    <ClInclude Include="StickyBallEffect.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

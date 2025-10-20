@@ -117,6 +117,8 @@ void PowerupManager::InitialisePowerups()
     PowerupContainer* fireBall = new PowerupContainer(_window, sf::Color::Red);
     PowerupContainer* bigBall = new PowerupContainer(_window, sf::Color::Magenta);
     PowerupContainer* smallBall = new PowerupContainer(_window, sf::Color::White);
+    PowerupContainer* stickyBall = new PowerupContainer(_window, sf::Color(184,165,110));
+    PowerupContainer* godModeBall = new PowerupContainer(_window, sf::Color(245,241,118));
 
     fastBall->AddEffect(new BallSpeedEffect(_ball, 2.0f));
     fastBall->AddEffect(new BallSizeEffect(_ball, 0.85f));
@@ -136,6 +138,9 @@ void PowerupManager::InitialisePowerups()
     smallBall->AddEffect(new BallSizeEffect(_ball, 0.5f));
     smallBall->AddEffect(new BallSpeedEffect(_ball, 1.15f));
 
+    stickyBall->AddEffect(new StickyBallEffect(_ball));
+    godModeBall->AddEffect(new GodModeEffect(_ball));
+
     templatePowerups.push_back(fastBall);
     templatePowerups.push_back(slowBall);
     templatePowerups.push_back(bigPaddle);
@@ -145,4 +150,6 @@ void PowerupManager::InitialisePowerups()
     templatePowerups.push_back(fireBall);
     templatePowerups.push_back(bigBall);
     templatePowerups.push_back(smallBall);
+    templatePowerups.push_back(stickyBall);
+    templatePowerups.push_back(godModeBall);
 }

@@ -8,3 +8,5 @@
 #include "FireBallEffect.h"
 #include "PaddleSizeEffect.h"
 #include "PaddleSpeedEffect.h"
+#include "StickyBallEffect.h"
+#include "GodModeEffect.h"
