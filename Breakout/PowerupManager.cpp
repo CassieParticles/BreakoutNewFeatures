@@ -117,7 +117,7 @@ void PowerupManager::InitialisePowerups()
     PowerupContainer* fireBall = new PowerupContainer(_window, sf::Color::Red);
     PowerupContainer* bigBall = new PowerupContainer(_window, sf::Color::Magenta);
     PowerupContainer* smallBall = new PowerupContainer(_window, sf::Color::White);
-    PowerupContainer* stickyBall = new PowerupContainer(_window, sf::Color(92,82,55),15.0f);
+    PowerupContainer* stickyBall = new PowerupContainer(_window, sf::Color(174,159,104),15.0f);
     PowerupContainer* godModeBall = new PowerupContainer(_window, sf::Color(137,80,47));
 
     fastBall->AddEffect(new BallSpeedEffect(_ball, 2.0f));

@@ -20,7 +20,7 @@ void Ball::update(float dt)
     if (_isStuck)
     {
         Paddle* paddle = _gameManager->getPaddle();
-        _sprite.setPosition(paddle->getPosition() + sf::Vector2f(paddle->getBounds().width / 2, -_sprite.getRadius() / 2 - 5));
+        _sprite.setPosition(paddle->getPosition() + sf::Vector2f(paddle->getBounds().width / 2, -_sprite.getRadius() - paddle->getBounds().height / 2 - 1));
         //Stickiness wears off, or player launches with space
         if (!_StickyBallCount || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
