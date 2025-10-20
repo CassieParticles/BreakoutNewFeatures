@@ -7,7 +7,6 @@
 #include "Ball.h"
 
 #include "PowerupContainer.h"
-#include "Effects.h"
 
 
 class PowerupManager
