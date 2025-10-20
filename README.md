@@ -32,9 +32,9 @@ fire ball (green)
 * Implement commentary with calls to an LLM such as LLama
 
 # Time Details and Changelist
-12:50-13:00 - Fixed circular dependency
+10 min - Fixed circular dependency
 
-17:00-20:15 - Refactored and overhauled powerup system, remanaged object responsibilities
+3 1/2 hrs - Refactored and overhauled powerup system, remanaged object responsibilities
 Powerups now work on a composition based system, where powerups can be made up using effects, effects can be created by making a class inherit from the BaseEffect and overriding the virtual member functions (ApplyEffect, EndEffect, CopyEffect, GetName)
 ApplyEffect needs to call the BaseEffect ApplyEffect function and CopyEffect needs to return a new identical copy of the effect. EndEffect needs to fully reverse what ApplyEffect did, so if ApplyEffect added 1 to ball size, EndEffect needs to subtract 1
 Adding new powerups is done in the powerupManager InitialisePowerups function, define a new PowerupContainer, add the effects wanted using the AddEffect function, then add the new powerup to the templatePowerups vector, new powerups will be selected from that vector
@@ -46,4 +46,9 @@ It also runs the problem of a developer forgetting to change any of the specific
 designer wanted the player to have multiple active powerups, they couldn't.
 
 Overall the new system is designed to be more usable for adding new powerups and effects, and reduce the responsibilities of other systems to keep up to date with the current powerups
+
+30 minutes - Added new powerups
+Paddle speed - Increase or decrease the speed of the paddle
+Sticky ball - Ball sticks to the paddle, press space to launch it
+Godmode - Ball acts as fireball + cannot lose lives
 
