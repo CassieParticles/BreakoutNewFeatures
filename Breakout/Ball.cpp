@@ -2,9 +2,9 @@
 #include "GameManager.h" // avoid cicular dependencies
 #include <iostream>
 
-Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
+Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager, LivesCounter* livesCounter)
     : _window(window), _velocity(velocity), _gameManager(gameManager),
-     _isAlive(true), _direction({1,1})
+     _isAlive(true), _direction({1,1}), _livesCounter{livesCounter}
 {
     _sprite.setRadius(RADIUS);
     _sprite.setFillColor(sf::Color::Cyan);
@@ -71,7 +71,7 @@ void Ball::update(float dt)
         {      
             _sprite.setPosition(0, 300);
             _direction = { 1, 1 };
-            _gameManager->loseLife();
+            _livesCounter->LoseLife();
         }
 
     }

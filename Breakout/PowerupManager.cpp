@@ -3,8 +3,9 @@
 #include <iostream>
 
 
-PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball)
-    : _window(window), _paddle(paddle), _ball(ball)
+
+PowerupManager::PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball, LivesCounter* livesCounter)
+    : _window(window), _paddle(paddle), _ball(ball), _livesCounter{livesCounter}
 {
     InitialisePowerups();
 }
@@ -120,6 +121,8 @@ void PowerupManager::InitialisePowerups()
     PowerupContainer* stickyBall = new PowerupContainer(_window, sf::Color(174,159,104),15.0f);
     PowerupContainer* godModeBall = new PowerupContainer(_window, sf::Color(137,80,47));
 
+    PowerupContainer* extraLife = new PowerupContainer(_window, sf::Color(128,255,128),0.0f);
+
     fastBall->AddEffect(new BallSpeedEffect(_ball, 2.0f));
     fastBall->AddEffect(new BallSizeEffect(_ball, 0.85f));
     slowBall->AddEffect(new BallSpeedEffect(_ball, 0.5f));
@@ -143,6 +146,8 @@ void PowerupManager::InitialisePowerups()
     godModeBall->AddEffect(new FireBallEffect(_ball));
     godModeBall->AddEffect(new BallSpeedEffect(_ball, 2.0f));
 
+    extraLife->AddEffect(new ExtraLifeEffect(_livesCounter));
+
     templatePowerups.push_back(fastBall);
     templatePowerups.push_back(slowBall);
     templatePowerups.push_back(bigPaddle);
@@ -154,4 +159,5 @@ void PowerupManager::InitialisePowerups()
     templatePowerups.push_back(smallBall);
     templatePowerups.push_back(stickyBall);
     templatePowerups.push_back(godModeBall);
+    templatePowerups.push_back(extraLife);
 }

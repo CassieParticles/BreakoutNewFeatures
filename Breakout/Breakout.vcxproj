@@ -145,9 +145,11 @@
     <ClCompile Include="BrickManager.cpp" />
     <ClCompile Include="DebugEffect.cpp" />
     <ClCompile Include="BaseEffect.cpp" />
+    <ClCompile Include="ExtraLifeEffect.cpp" />
     <ClCompile Include="FireBallEffect.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GodModeEffect.cpp" />
+    <ClCompile Include="LivesCounter.cpp" />
     <ClCompile Include="main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)/SFML/include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -169,10 +171,12 @@
     <ClInclude Include="CONSTANTS.h" />
     <ClInclude Include="DebugEffect.h" />
     <ClInclude Include="Effects.h" />
+    <ClInclude Include="ExtraLifeEffect.h" />
     <ClInclude Include="FireBallEffect.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="BaseEffect.h" />
     <ClInclude Include="GodModeEffect.h" />
+    <ClInclude Include="LivesCounter.h" />
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PaddleSizeEffect.h" />

@@ -12,7 +12,7 @@ UI::UI(sf::RenderWindow* window, int lives, GameManager* gameManager)
 	for (int i = lives; i > 0; --i)
 	{
 		sf::CircleShape newLife;
-		newLife.setFillColor(sf::Color::Red);	
+		newLife.setFillColor(lifeColor);
 		newLife.setOutlineColor(sf::Color::Cyan);
 		newLife.setOutlineThickness(4.0f);
 		newLife.setRadius(LIFE_RADIUS);
@@ -80,7 +80,10 @@ void UI::updatePowerupText(const std::vector<std::shared_ptr<BaseEffect>> effect
 
 void UI::lifeLost(int lives)
 {
-	_lives[_lives.size() - 1 - lives].setFillColor(sf::Color::Transparent);
+	for (int i = 0; i < _lives.size(); ++i)
+	{
+		_lives[ _lives.size() - i - 1].setFillColor(i < lives ? lifeColor : lostLifeColor);
+	}
 }
 
 void UI::render()

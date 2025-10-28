@@ -10,3 +10,4 @@
 #include "PaddleSpeedEffect.h"
 #include "StickyBallEffect.h"
 #include "GodModeEffect.h"
+#include "ExtraLifeEffect.h"

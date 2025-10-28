@@ -3,12 +3,12 @@
 
 
 class GameManager;  // forward declaration
-
+class LivesCounter;
 
 
 class Ball {
 public:
-    Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager);
+    Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager, LivesCounter* livesCounter);
     ~Ball();
     void update(float dt);
     void render();
@@ -36,7 +36,7 @@ private:
     sf::Vector2f _stuckDirection;
 
     GameManager* _gameManager;  // Reference to the GameManager
-
+    LivesCounter* _livesCounter;
 
     static constexpr float RADIUS = 10.0f;      
     static constexpr float VELOCITY = 350.0f;   // for reference.

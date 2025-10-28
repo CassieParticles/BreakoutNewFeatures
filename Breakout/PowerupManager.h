@@ -8,11 +8,12 @@
 
 #include "PowerupContainer.h"
 
+class LivesCounter;
 
 class PowerupManager
 {
 public:
-    PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball);
+    PowerupManager(sf::RenderWindow* window, Paddle* paddle, Ball* ball, LivesCounter* livesCounter);
     ~PowerupManager();
 
     void update(float dt);
@@ -27,6 +28,7 @@ private:
     sf::RenderWindow* _window;
     Paddle* _paddle;
     Ball* _ball;
+    LivesCounter* _livesCounter;
 
     std::vector<PowerupContainer*> _powerups;
 

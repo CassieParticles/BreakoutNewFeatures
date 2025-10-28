@@ -26,6 +26,9 @@ private:
 
 	std::vector<sf::CircleShape> _lives;
 
+	const sf::Color lifeColor = sf::Color::Red;
+	const sf::Color lostLifeColor = sf::Color::Transparent;
+
 	static constexpr float LIFE_RADIUS = 15.0f;
 	static constexpr float LIFE_PADDING = 20.0f;
 };
